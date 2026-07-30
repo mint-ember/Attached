@@ -98,7 +98,7 @@ export function Sidebar() {
   return (
     <div
       className={cn(
-        'fixed left-0 top-0 z-50 h-screen bg-sidebar border-l border-sidebar-border transition-all duration-300',
+        'fixed right-0 top-0 z-50 h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300',
         collapsed ? 'w-16' : 'w-64'
       )}
     >
