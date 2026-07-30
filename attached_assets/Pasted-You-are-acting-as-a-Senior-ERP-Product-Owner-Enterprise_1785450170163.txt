@@ -1,0 +1,124 @@
+You are acting as a Senior ERP Product Owner, Enterprise UX Architect, SAP Business One Consultant, Odoo Enterprise Consultant, Microsoft Dynamics 365 Consultant, Oracle NetSuite Consultant, Saudi ERP Expert, POS Expert, and E-Commerce Architect.
+
+Before building anything, research and follow enterprise ERP standards, Saudi business requirements, and modern UI/UX best practices.
+
+Do not create simplified screens.
+
+Do not guess fields.
+
+Research what fields, forms, workflows, filters, actions, dashboards, reports, and settings a real enterprise ERP should contain, then implement them completely.
+
+Every page must be production-ready and comparable to SAP Business One, Odoo Enterprise, Microsoft Dynamics 365 Business Central, Oracle NetSuite, Oracle Fusion, and Rewaa.
+
+The first milestone is FRONTEND ONLY.
+
+Do NOT build backend, APIs, database, authentication, or business logic yet.
+
+Instead, build a complete enterprise frontend that is fully prepared for backend integration later.
+
+Every page must include:
+
+- Complete forms
+- Correct enterprise fields
+- Professional tables
+- Search
+- Advanced filters
+- Sorting
+- Bulk actions
+- Import/Export
+- Print
+- Dashboard widgets
+- Charts
+- Statistics
+- Cards
+- Dialogs
+- Drawers
+- Tabs
+- Wizards
+- Validation states
+- Loading states
+- Empty states
+- Error states
+- Notifications
+- Responsive layouts
+- Full RTL support
+- Arabic-first design
+
+Do not use placeholder pages or "Coming Soon".
+
+If information is missing, research enterprise standards and implement the best industry practice.
+
+------------------------------------------------------------
+NEW MODULE 1
+Enterprise Point of Sale (POS)
+------------------------------------------------------------
+
+Build a complete Saudi-ready POS interface.
+
+Research modern POS systems and include every required screen, workflow, and field.
+
+Support:
+
+- Retail
+- Restaurant
+- Pharmacy
+- Electronics
+- Fashion
+- Grocery
+- Wholesale
+
+Include professional cashier screen, barcode scanning, product search, customer management, cart, discounts, promotions, loyalty, gift cards, returns, exchanges, split payments, cash/card/wallet payments, receipt preview, ZATCA receipt layout, shift management, cash opening/closing, X/Z reports, sales reports, printer status, device status, branch settings, warehouse selection, and every enterprise feature expected in a commercial POS.
+
+------------------------------------------------------------
+NEW MODULE 2
+Enterprise E-Commerce Builder
+------------------------------------------------------------
+
+Every company can create its own online store directly from the ERP.
+
+Research modern platforms like Shopify, WooCommerce, BigCommerce, Ecwid, Zid, Salla, and expand beyond them.
+
+Build a complete website builder interface including:
+
+- Store dashboard
+- Theme manager
+- Theme editor
+- Page builder
+- Header builder
+- Footer builder
+- Navigation builder
+- Homepage builder
+- Product pages
+- Category pages
+- Brand pages
+- Cart
+- Checkout
+- Customer account
+- Wishlist
+- Search
+- Order tracking
+- Blog
+- SEO
+- Marketing
+- Coupons
+- Shipping
+- Payment methods
+- Analytics
+- Custom domain
+- Store settings
+
+Create three premium themes:
+
+1. Electronics Store
+2. Fashion & Perfume Store
+3. General Retail Store
+
+Each theme must have a unique design, homepage, product page, category page, checkout, responsive mobile version, RTL support, Arabic-first design, and professional enterprise UI.
+
+------------------------------------------------------------
+
+Always search for missing requirements instead of simplifying.
+
+If a professional ERP or POS or E-Commerce platform contains additional fields or workflows, include them automatically.
+
+Your goal is to design a commercial-grade product, not a demo.
