@@ -281,8 +281,14 @@ const navigation = [
   },
 ];
 
-export function Sidebar() {
-  const [collapsed, setCollapsed] = useState(false);
+interface SidebarProps {
+  collapsed: boolean;
+  onCollapse: (v: boolean) => void;
+  mobileOpen: boolean;
+  onMobileClose: () => void;
+}
+
+export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: SidebarProps) {
   const [location] = useLocation();
   const [openSections, setOpenSections] = useState<string[]>([]);
 
@@ -293,13 +299,26 @@ export function Sidebar() {
   };
 
   return (
-    <div
-      dir="rtl"
-      className={cn(
-        'fixed right-0 top-0 z-50 h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300',
-        collapsed ? 'w-16' : 'w-64'
+    <>
+      {/* Mobile overlay backdrop */}
+      {mobileOpen && (
+        <div
+          className="fixed inset-0 z-40 bg-black/50 md:hidden"
+          onClick={onMobileClose}
+        />
       )}
-    >
+
+      <div
+        dir="rtl"
+        className={cn(
+          'fixed right-0 top-0 z-50 h-screen bg-sidebar border-l border-sidebar-border transition-all duration-300',
+          /* desktop width */
+          collapsed ? 'md:w-16' : 'md:w-64',
+          /* mobile: full sidebar width, hidden off-screen unless open */
+          'w-64',
+          mobileOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
+        )}
+      >
       <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
         {!collapsed && (
           <h1 className="text-base font-bold text-sidebar-foreground truncate">نظام محاسبي متكامل</h1>
@@ -307,7 +326,10 @@ export function Sidebar() {
         <Button
           variant="ghost"
           size="icon"
-          onClick={() => setCollapsed(!collapsed)}
+          onClick={() => {
+            onCollapse(!collapsed);
+            onMobileClose();
+          }}
           className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground shrink-0"
           data-testid="button-toggle-sidebar"
         >
@@ -391,5 +413,6 @@ export function Sidebar() {
         </div>
       </ScrollArea>
     </div>
+    </>
   );
 }

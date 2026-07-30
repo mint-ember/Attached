@@ -1,8 +1,12 @@
+import { useState } from 'react';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { Toaster } from '@/components/ui/toaster';
 import { TooltipProvider } from '@/components/ui/tooltip';
 import { Route, Switch, Router as WouterRouter } from 'wouter';
 import { Sidebar } from '@/components/layout/sidebar';
+import { Button } from '@/components/ui/button';
+import { Menu } from 'lucide-react';
+import { cn } from '@/lib/utils';
 
 // Implemented pages
 import Dashboard from '@/pages/dashboard';
@@ -21,10 +25,37 @@ function P(title: string, description = '') {
 }
 
 function Router() {
+  const [collapsed, setCollapsed] = useState(false);
+  const [mobileOpen, setMobileOpen] = useState(false);
+
   return (
     <div className="flex">
-      <Sidebar />
-      <div className="flex-1 mr-64">
+      <Sidebar
+        collapsed={collapsed}
+        onCollapse={setCollapsed}
+        mobileOpen={mobileOpen}
+        onMobileClose={() => setMobileOpen(false)}
+      />
+      <div
+        className={cn(
+          'flex-1 min-w-0 transition-all duration-300',
+          /* desktop: margin matches sidebar width */
+          collapsed ? 'md:mr-16' : 'md:mr-64',
+          /* mobile: no margin, sidebar is overlay */
+          'mr-0'
+        )}
+      >
+        {/* Mobile top bar */}
+        <div className="sticky top-0 z-30 flex items-center h-12 px-4 bg-background border-b md:hidden">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => setMobileOpen(true)}
+            className="ml-auto"
+          >
+            <Menu className="h-5 w-5" />
+          </Button>
+        </div>
         <Switch>
           {/* Main Dashboard */}
           <Route path="/" component={Dashboard} />
