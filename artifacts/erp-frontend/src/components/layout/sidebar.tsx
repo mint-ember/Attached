@@ -294,6 +294,7 @@ export function Sidebar() {
 
   return (
     <div
+      dir="rtl"
       className={cn(
         'fixed right-0 top-0 z-50 h-screen bg-sidebar border-r border-sidebar-border transition-all duration-300',
         collapsed ? 'w-16' : 'w-64'
@@ -332,10 +333,7 @@ export function Sidebar() {
                     )}
                     data-testid={`button-toggle-${item.label}`}
                   >
-                    <div className="flex items-center gap-2">
-                      <item.icon className="h-4 w-4 shrink-0" />
-                      {!collapsed && <span className="truncate">{item.label}</span>}
-                    </div>
+                    {/* السهم أقصى يسار */}
                     {!collapsed && (
                       <ChevronDown
                         className={cn(
@@ -344,23 +342,28 @@ export function Sidebar() {
                         )}
                       />
                     )}
+                    {/* النص ثم الأيقونة أقصى يمين */}
+                    <div className="flex items-center gap-2">
+                      {!collapsed && <span className="truncate">{item.label}</span>}
+                      <item.icon className="h-4 w-4 shrink-0" />
+                    </div>
                   </Button>
                 </CollapsibleTrigger>
                 {!collapsed && (
-                  <CollapsibleContent className="space-y-0.5 pr-3 pt-0.5">
+                  <CollapsibleContent className="space-y-0.5 pl-3 pt-0.5">
                     {item.children.map((child) => (
                       <Link key={child.href} href={child.href}>
                         <Button
                           variant="ghost"
                           className={cn(
-                            'w-full justify-start gap-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground h-8 text-xs',
+                            'w-full justify-end gap-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground h-8 text-xs',
                             location === child.href &&
                               'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary hover:text-sidebar-primary-foreground'
                           )}
                           data-testid={`link-${child.label}`}
                         >
-                          <child.icon className="h-3.5 w-3.5 shrink-0" />
                           <span className="truncate">{child.label}</span>
+                          <child.icon className="h-3.5 w-3.5 shrink-0" />
                         </Button>
                       </Link>
                     ))}
@@ -372,15 +375,15 @@ export function Sidebar() {
                 <Button
                   variant="ghost"
                   className={cn(
-                    'w-full justify-start gap-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground h-9 text-sm',
+                    'w-full justify-end gap-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground h-9 text-sm',
                     collapsed && 'justify-center',
                     location === item.href &&
                       'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary hover:text-sidebar-primary-foreground'
                   )}
                   data-testid={`link-${item.label}`}
                 >
-                  <item.icon className="h-4 w-4 shrink-0" />
                   {!collapsed && <span className="truncate">{item.label}</span>}
+                  <item.icon className="h-4 w-4 shrink-0" />
                 </Button>
               </Link>
             )
