@@ -10,7 +10,7 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@
 
 export default function POSProducts() {
   const [search, setSearch] = useState('');
-  const [categoryFilter, setCategory Filter] = useState('الكل');
+  const [categoryFilter, setCategoryFilter] = useState('الكل');
   const [statusFilter, setStatusFilter] = useState('الكل');
 
   const filteredProducts = useMemo(() => {
