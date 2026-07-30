@@ -292,6 +292,9 @@ export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: Si
   const [location] = useLocation();
   const [openSections, setOpenSections] = useState<string[]>([]);
 
+  // On mobile the sidebar is always full-width when open, regardless of desktop collapsed state
+  const showFull = mobileOpen || !collapsed;
+
   const toggleSection = (label: string) => {
     setOpenSections((prev) =>
       prev.includes(label) ? prev.filter((s) => s !== label) : [...prev, label]
@@ -312,23 +315,26 @@ export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: Si
         dir="rtl"
         className={cn(
           'fixed right-0 top-0 z-50 h-screen bg-sidebar border-l border-sidebar-border transition-all duration-300',
-          /* desktop width */
+          /* desktop width follows collapsed state; mobile always w-64 */
           collapsed ? 'md:w-16' : 'md:w-64',
-          /* mobile: full sidebar width, hidden off-screen unless open */
           'w-64',
+          /* mobile: slide in/out from right */
           mobileOpen ? 'translate-x-0' : 'translate-x-full md:translate-x-0'
         )}
       >
       <div className="flex h-16 items-center justify-between border-b border-sidebar-border px-4">
-        {!collapsed && (
+        {showFull && (
           <h1 className="text-base font-bold text-sidebar-foreground truncate">نظام محاسبي متكامل</h1>
         )}
         <Button
           variant="ghost"
           size="icon"
           onClick={() => {
-            onCollapse(!collapsed);
-            onMobileClose();
+            if (mobileOpen) {
+              onMobileClose();
+            } else {
+              onCollapse(!collapsed);
+            }
           }}
           className="text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground shrink-0"
           data-testid="button-toggle-sidebar"
@@ -351,12 +357,12 @@ export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: Si
                     variant="ghost"
                     className={cn(
                       'w-full justify-between text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground text-sm h-9',
-                      collapsed && 'justify-center'
+                      !showFull && 'justify-center'
                     )}
                     data-testid={`button-toggle-${item.label}`}
                   >
                     {/* السهم أقصى يسار */}
-                    {!collapsed && (
+                    {showFull && (
                       <ChevronDown
                         className={cn(
                           'h-3.5 w-3.5 shrink-0 transition-transform',
@@ -366,15 +372,15 @@ export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: Si
                     )}
                     {/* النص ثم الأيقونة أقصى يمين */}
                     <div className="flex items-center gap-2">
-                      {!collapsed && <span className="truncate">{item.label}</span>}
+                      {showFull && <span className="truncate">{item.label}</span>}
                       <item.icon className="h-4 w-4 shrink-0" />
                     </div>
                   </Button>
                 </CollapsibleTrigger>
-                {!collapsed && (
+                {showFull && (
                   <CollapsibleContent className="space-y-0.5 pl-3 pt-0.5">
                     {item.children.map((child) => (
-                      <Link key={child.href} href={child.href}>
+                      <Link key={child.href} href={child.href} onClick={mobileOpen ? onMobileClose : undefined}>
                         <Button
                           variant="ghost"
                           className={cn(
@@ -393,18 +399,18 @@ export function Sidebar({ collapsed, onCollapse, mobileOpen, onMobileClose }: Si
                 )}
               </Collapsible>
             ) : (
-              <Link key={item.href} href={item.href}>
+              <Link key={item.href} href={item.href} onClick={mobileOpen ? onMobileClose : undefined}>
                 <Button
                   variant="ghost"
                   className={cn(
                     'w-full justify-end gap-2 text-sidebar-foreground hover:bg-sidebar-accent hover:text-sidebar-accent-foreground h-9 text-sm',
-                    collapsed && 'justify-center',
+                    !showFull && 'justify-center',
                     location === item.href &&
                       'bg-sidebar-primary text-sidebar-primary-foreground hover:bg-sidebar-primary hover:text-sidebar-primary-foreground'
                   )}
                   data-testid={`link-${item.label}`}
                 >
-                  {!collapsed && <span className="truncate">{item.label}</span>}
+                  {showFull && <span className="truncate">{item.label}</span>}
                   <item.icon className="h-4 w-4 shrink-0" />
                 </Button>
               </Link>
