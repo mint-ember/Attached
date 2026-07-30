@@ -20,7 +20,7 @@ function Router() {
   return (
     <div className="flex">
       <Sidebar />
-      <div className="flex-1 ml-64">
+      <div className="flex-1 mr-64">
         <Switch>
           {/* Main Dashboard */}
           <Route path="/" component={Dashboard} />
